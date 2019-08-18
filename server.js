@@ -133,6 +133,21 @@ app.post("/apartment", (req, res) => {
   });
 });
 
+app.get("/dashboard", async (req, res) => {
+  const apartment = await Apartment.find({});
+  const user = await User.find({});
+  //  const apartment = await User.find({});
+  try {
+    res.render("dashboard", {
+      title: "dashboard",
+      users: user,
+      apartments: apartment
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.listen(port, () => {
   console.log(`Application is running in ${port}`);
 });
